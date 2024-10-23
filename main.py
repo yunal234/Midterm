@@ -9,7 +9,25 @@ from calculator.calculations import Calculator
 def show_menu():
     '''Display the menu with list of operations'''
     print("\nChoose an operation: Add, Subtract, Multiply, Divide")
+    print("Type 'history' to see calculation history.")
+    print("Type 'save' to save history, 'load' to load history, 'clear' to clear the history.")
     print("Type 'exit' to quit the calculator application.")
+
+def process_history_commands(operation, calculator):
+    '''process the history command operations'''
+    if operation == 'history':
+        calculator.show_history()
+    elif operation == 'save':
+        calculator.save_history()
+        print("History saved.")
+    elif operation == 'load':
+        calculator.load_history()
+        print("History loaded.")
+    elif operation == 'clear':
+        calculator.clear_history()
+        print("History cleared.")
+    else:
+        print("Unknown history command.")
 
 def main():
     '''Run the calculator REPL loop'''
@@ -21,6 +39,10 @@ def main():
 
         if operation == 'exit':
             break
+
+        if operation in ['history', 'save', 'load', 'clear']:
+            process_history_commands(operation, calculator)
+            continue
 
         a = input("Enter first number: ").strip()
         b = input("Enter second number: ").strip()
