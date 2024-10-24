@@ -6,10 +6,11 @@ from commands.command_handler import CommandHandler
 def show_menu(handler):
     '''Display the menu with list of operations'''
     print("\nChoose an operation:")
+    print("\nAdd\nSubtract\nMultiply\nDivide")
     for command in handler.plugins:
         print(f"- {command.capitalize()} (plugin)")
-    print("Type 'history' to see your calculation history.")
-    print("Type 'exit' to quit the calculator application.")
+    print("\nType 'history' to see your calculation history.")
+    print("\nType 'exit' to quit the calculator application.")
 
 def process_history_commands(operation, calculator):
     '''process the history command operations'''
@@ -35,7 +36,7 @@ def main():
 
     while True:
         show_menu(handler)
-        operation = input("Enter operation: ").strip().lower()
+        operation = input("\nEnter operation: ").strip().lower()
 
         if operation == 'exit':
             break
