@@ -5,7 +5,7 @@ import os
 import importlib
 
 class CommandHandler:
-    '''This class will manage the plugis'''
+    '''This class will manage the plugins'''
     def __init__(self, plugin_dir='plugins'):
         '''Initialize the CommandHandler'''
         self.plugin_dir = plugin_dir
@@ -22,7 +22,9 @@ class CommandHandler:
                     module = importlib.import_module(module_name)
 
                     if hasattr(module, 'COMMAND'):
-                        self.plugins[module.COMMAND.lower()] = module.AddCommand
+                        command_class_name = module.COMMAND + "Command"
+                        command_class = getattr(module, command_class_name)
+                        self.plugins[module.COMMAND.lower()] = command_class
 
     def execute_command(self, operation, a,b):
         '''Execute the command of the operation and return the result.
