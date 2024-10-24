@@ -1,6 +1,9 @@
 # add.py
 '''This contains the AddCommand class'''
+
 from calculator.operations import add
+
+COMMAND = 'add'
 #pylint: disable=too-few-public-methods
 class AddCommand:
     '''Add the inputs'''

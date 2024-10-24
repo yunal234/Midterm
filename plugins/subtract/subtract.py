@@ -1,6 +1,9 @@
 # subtract.py
 '''Contains the SubtractCommand class'''
+
 from calculator.operations import subtract
+
+COMMAND = 'subtract'
 #pylint: disable=too-few-public-methods
 class SubtractCommand:
     '''Subtract the inputs'''

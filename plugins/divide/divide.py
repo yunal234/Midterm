@@ -1,6 +1,9 @@
 # divide.py
 '''Contains the DivdeCommand class.'''
+
 from calculator.operations import divide
+
+COMMAND = 'divide'
 #pylint: disable=too-few-public-methods
 class DivideCommand:
     '''Divide the inputs.'''

@@ -1,6 +1,9 @@
 # multiply.py
 '''Contains the MultiplyCommand class.'''
+
 from calculator.operations import multiply
+
+COMMAND = 'multiply'
 #pylint: disable=too-few-public-methods
 class MultiplyCommand:
     '''Mutiply the inputs'''
