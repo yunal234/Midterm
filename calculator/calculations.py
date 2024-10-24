@@ -1,5 +1,6 @@
 # calculations.py
 '''Contains the Calculator class which manages the calculations and history.'''
+from decimal import InvalidOperation
 from calculator.history import ManageHistory
 
 class Calculator:
@@ -11,9 +12,13 @@ class Calculator:
     def execute(self, command):
         '''Execute the commands and store the history to result and 
         return the result of the executed command.'''
-        result = command.execute()
-        self.history.add_entry(command.__class__.__name__, command.a, command.b, result)
-        return result
+        try:
+            result = command.execute()
+            self.history.add_entry(command.__class__.__name__, command.a, command.b, result)
+            return result
+        except (ValueError, TypeError, InvalidOperation) as e:
+            print(f"Error executing command: {e}")
+            return None
 
     def show_history(self):
         '''show the history'''
@@ -30,7 +35,3 @@ class Calculator:
     def clear_history(self):
         '''clear the history'''
         self.history.clear_history()
-
-    def get_history(self):
-        '''Get the history of the calculations and return the list of each calculation.'''
-        return self.history.get_history()
