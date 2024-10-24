@@ -29,7 +29,7 @@ class Calculator:
 
     def clear_history(self):
         '''clear the history'''
-        self.history.load_history()
+        self.history.clear_history()
 
     def get_history(self):
         '''Get the history of the calculations and return the list of each calculation.'''
