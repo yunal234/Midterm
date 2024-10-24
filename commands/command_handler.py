@@ -15,14 +15,14 @@ class CommandHandler:
         '''Load plugin from the plugin_dir.
         Each plugin file should correspond with its specified attribute'''
         # Look before you leap
-        for root, files in os.walk(self.plugin_dir):
+        for root, _, files in os.walk(self.plugin_dir):
             for file in files:
                 if file.endswith('.py') and file != '__init__.py':
                     module_name = f"{root.replace('/', '.')}.{file[:-3]}"
                     module = importlib.import_module(module_name)
 
                     if hasattr(module, 'COMMAND'):
-                        self.plugins[module.COMMAND] = module.AddCommand
+                        self.plugins[module.COMMAND.lower()] = module.AddCommand
 
     def execute_command(self, operation, a,b):
         '''Execute the command of the operation and return the result.
