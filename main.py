@@ -1,21 +1,23 @@
 # main.py
 '''REPL interface for user interaction'''
+import os
 from calculator.calculations import Calculator
 from commands.command_handler import CommandHandler
 
 def show_menu(handler):
     '''Display the menu with list of operations'''
     print("\nChoose an operation:")
-    print("\nAdd\nSubtract\nMultiply\nDivide")
     for command in handler.plugins:
-        print(f"- {command.capitalize()} (plugin)")
+        print(f"- {command}")
     print("\nType 'history' to see your calculation history.")
+    print("Type 'clear' to clear history.")
+    print("Type 'save' to save your inputs.")
     print("\nType 'exit' to quit the calculator application.")
 
 def process_history_commands(operation, calculator):
     '''process the history command operations'''
     if operation == 'history':
-        calculator.show_history()
+        calculator.history.show_history()
     elif operation == 'save':
         calculator.save_history()
         print("History saved.")
@@ -30,12 +32,14 @@ def process_history_commands(operation, calculator):
 
 def main():
     '''Run the calculator REPL loop'''
+    print("Current working directory:", os.getcwd())
     calculator = Calculator()
     handler = CommandHandler()
     handler.load_plugins()
 
+    show_menu(handler)
+
     while True:
-        show_menu(handler)
         operation = input("\nEnter operation: ").strip().lower()
 
         if operation == 'exit':
@@ -51,6 +55,8 @@ def main():
         try:
             result = handler.execute_command(operation, a, b)
             print(f"Result: {result}")
+
+            calculator.history.add_entry(operation, a, b, result)
 
         except ValueError as e:
             print(f"Error: {e}")
