@@ -3,6 +3,9 @@
 executing dynamically loaded plugins'''
 import os
 import importlib
+import logging
+
+logger = logging.getLogger(__name__)
 
 class CommandHandler:
     '''This class will manage the plugins'''
@@ -22,9 +25,12 @@ class CommandHandler:
                     module = importlib.import_module(module_name)
 
                     if hasattr(module, 'COMMAND'):
-                        command_class_name = module.COMMAND + "Command"
+                        command_class_name = module.COMMAND.capitalize() + "Command"
                         command_class = getattr(module, command_class_name)
                         self.plugins[module.COMMAND.lower()] = command_class
+                        logger.debug("Loaded command: %s", command_class_name)
+                    else:
+                        logger.error("%s not found in%s", command_class_name, module_name)
 
     def execute_command(self, operation, a,b):
         '''Execute the command of the operation and return the result.
