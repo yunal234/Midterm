@@ -1,9 +1,12 @@
 # add.py
 '''This contains the AddCommand class'''
-
+import logging
 from calculator.operations import add
 
+
 COMMAND = 'add'
+logger = logging.getLogger(__name__)
+
 #pylint: disable=too-few-public-methods
 class AddCommand:
     '''Add the inputs'''
@@ -13,4 +16,6 @@ class AddCommand:
 
     def execute(self):
         '''execute the inputs'''
-        return add(self.a, self.b)
+        result = add(self.a, self.b)
+        logger.info("Executing AddCommand: %s + %s = %s", self.a, self.b, result)
+        return result

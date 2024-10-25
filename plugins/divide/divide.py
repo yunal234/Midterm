@@ -1,9 +1,11 @@
 # divide.py
 '''Contains the DivdeCommand class.'''
-
+import logging
 from calculator.operations import divide
 
 COMMAND = 'divide'
+logger = logging.getLogger(__name__)
+
 #pylint: disable=too-few-public-methods
 class DivideCommand:
     '''Divide the inputs.'''
@@ -13,4 +15,6 @@ class DivideCommand:
 
     def execute(self):
         '''execute the inputs'''
-        return divide(self.a, self.b)
+        result = divide(self.a, self.b)
+        logger.info("Executing DivideCommand: %s + %s = %s", self.a, self.b, result)
+        return result
