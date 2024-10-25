@@ -35,17 +35,22 @@ def process_history_commands(operation, calculator):
     '''process the history command operations'''
     if operation == 'history':
         calculator.history.show_history()
+        logger.info("History displayed: \n%s", calculator.history.history_df)
     elif operation == 'save':
         calculator.save_history()
         print("History saved.")
+        logger.info("History saved")
     elif operation == 'load':
         calculator.load_history()
         print("History loaded.")
+        logger.info("History loaded")
     elif operation == 'clear':
         calculator.clear_history()
         print("History cleared.")
+        logger.info("History cleared")
     else:
         print("Unknown history command.")
+        logger.warning("Unknown command: %s", operation)
 
 def main():
     '''Run the calculator REPL loop'''
