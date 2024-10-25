@@ -18,7 +18,7 @@ class Calculator:
             return result
         except (ValueError, TypeError, InvalidOperation) as e:
             print(f"Error executing command: {e}")
-            return None
+            raise
 
     def show_history(self):
         '''show the history'''
