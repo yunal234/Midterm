@@ -1,8 +1,25 @@
 # main.py
 '''REPL interface for user interaction'''
 import os
+import logging
+import logging.config
+from dotenv import load_dotenv
 from calculator.calculations import Calculator
 from commands.command_handler import CommandHandler
+
+load_dotenv()
+
+log_file_path = os.getenv('LOG_FILE_PATH', 'logs/calculator.log')
+log_dir = os.path.dirname(log_file_path)
+
+'''Make sure the log directory exits and if it doesnt, create it'''
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+
+logging.config.fileConfig('logging.conf')
+logger = logging.getLogger(__name__)
+
+logger.info("Logging setup complete")
 
 def show_menu(handler):
     '''Display the menu with list of operations'''
@@ -43,6 +60,7 @@ def main():
         operation = input("\nEnter operation: ").strip().lower()
 
         if operation == 'exit':
+            logger.info("Exiting calculator")
             break
 
         if operation in ['history', 'save', 'load', 'clear']:
@@ -55,11 +73,13 @@ def main():
         try:
             result = handler.execute_command(operation, a, b)
             print(f"Result: {result}")
+            logger.info("Operation: %s, Inputs: %s, %s, Result: %s", operation, a, b, result)
 
             calculator.history.add_entry(operation, a, b, result)
 
         except ValueError as e:
             print(f"Error: {e}")
+            logger.error("ValueError: %s", e)
         except ZeroDivisionError as e:
             print(f"Invalid. Cannot divide by zero: {e}")
 
