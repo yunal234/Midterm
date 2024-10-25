@@ -1,0 +1,10 @@
+[MASTER]
+# Adjust maximum line length
+max-line-length=100
+
+[MESSAGES CONTROL]
+# Disable certain warnings you don't want to see
+disable=
+    redefined-outer-name,
+    too-few-public-methods,
+    missing-module-docstring
