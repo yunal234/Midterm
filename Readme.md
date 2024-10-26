@@ -73,3 +73,6 @@ To test the functionality:
 pytest --pylint
 ```
 The virtual environment should be activated before running tests. The testing checks for any errors in the core functions.
+
+## Video
+The video recording showing calculator demonstration. Click [here](https://drive.google.com/file/d/1UKzCK8OrRTVKyYFL3XpKqANle7vAN0Ks/view?usp=sharing)
