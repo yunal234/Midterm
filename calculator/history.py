@@ -27,7 +27,6 @@ class ManageHistory:
         '''Add new calculation to the history'''
         new_entry = pd.DataFrame([{'Operation': operation, 'a': a, 'b': b, 'Result': result}])
         self.history_df = pd.concat([self.history_df, new_entry], ignore_index=True)
-        self.save_history()
 
     def save_history(self):
         '''Save the current history to a CSV file'''
