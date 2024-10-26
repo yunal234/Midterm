@@ -72,6 +72,11 @@ def main():
             process_history_commands(operation, calculator)
             continue
 
+        if operation not in handler.plugins:
+            print(f"Error: Unknown operation '{operation}'")
+            logger.warning("Unknown operation attempted: %s", operation)
+            continue
+
         a = input("Enter first number: ").strip()
         b = input("Enter second number: ").strip()
 
