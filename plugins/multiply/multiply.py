@@ -1,9 +1,10 @@
 # multiply.py
 '''Contains the MultiplyCommand class.'''
-
+import logging
 from calculator.operations import multiply
 
 COMMAND = 'multiply'
+logger = logging.getLogger(__name__)
 #pylint: disable=too-few-public-methods
 class MultiplyCommand:
     '''Mutiply the inputs'''
@@ -13,4 +14,6 @@ class MultiplyCommand:
 
     def execute(self):
         '''Execute the inputs'''
-        return multiply(self.a, self.b)
+        result = multiply(self.a, self.b)
+        logger.info("Executing MultiplyCommand: %s + %s = %s", self.a, self.b, result)
+        return result
